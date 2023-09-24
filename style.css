@@ -98,7 +98,7 @@ footer {
 
 .hen-button {
   display: none;
-  background-image: url(./images/chicken4.jpg);
+  background-image: url(./images/chicken3.jpg);
   background-size: contain;
   background-position: center;
   background-color: rgb(34, 34, 34);
@@ -144,7 +144,7 @@ footer {
 .galleries .img-wrapper {
   width: 20vw;
   height: 20vh;
-  background-color: black;
+  background-color: rgb(32, 32, 32);
   display: grid;
   justify-content: center;
   align-items: center;
@@ -154,10 +154,12 @@ footer {
 .galleries img {
   width: auto;
   height: 20vh;
+  z-index: 0;
 }
 
 .galleries .img-wrapper:hover {
   opacity: 0.7;
+  z-index: 0;
 }
 
 .back-button,
@@ -182,4 +184,85 @@ footer {
 .back-button:active,
 .back-button2:active {
   background-color: rgb(145, 145, 145);
+}
+
+.lightroom {
+  position: absolute;
+  background-color: rgb(32, 32, 32);
+  width: 70vw;
+  height: 70vh;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  border: none;
+  display: none;
+  z-index: 1;
+}
+
+.lightroom button {
+  position: absolute;
+  z-index: 1;
+}
+
+.lightroom img {
+  height: 70vh;
+  width: auto;
+  margin: 0;
+  justify-self: center;
+}
+
+.close {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: 50%;
+  background-color: rgb(32, 32, 32);
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+
+.close:hover {
+  background-color: rgb(51, 51, 51);
+}
+
+.previous {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 10%;
+  background-color: rgb(32, 32, 32);
+  color: white;
+  font-size: 1.5rem;
+  border: none;
+}
+
+.previous:hover {
+  background-color: rgb(51, 51, 51);
+}
+
+.next {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 10%;
+  background-color: rgb(32, 32, 32);
+  color: white;
+  font-size: 1.5rem;
+  border: none;
+}
+
+.next:hover {
+  background-color: rgb(51, 51, 51);
 }

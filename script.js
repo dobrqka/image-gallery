@@ -130,3 +130,34 @@ const classCheck = (className) => {
     }
   });
 });
+
+const allImageWrappers = document.querySelectorAll(".img-wrapper");
+const lightRoom = document.querySelector(".lightroom");
+const lightRoomClose = document.querySelector(".close");
+
+// show lightroom
+
+allImageWrappers.forEach((imageWrapper) => {
+  imageWrapper.addEventListener("click", (e) => {
+    lightRoom.style.display = "grid";
+    document.querySelectorAll(".lightroom img").forEach((wrapper) => {
+      wrapper.remove();
+    });
+    if (e.target.classList.contains("img-wrapper")) {
+      const focusedImage = e.target.firstElementChild.cloneNode();
+      lightRoom.appendChild(focusedImage);
+    } else {
+      const focusedImage = e.target.cloneNode();
+      lightRoom.appendChild(focusedImage);
+    }
+  });
+});
+
+// close lightroom
+
+lightRoomClose.addEventListener("click", () => {
+  lightRoom.style.display = "none";
+  document.querySelectorAll(".lightroom .img-wrapper").forEach((wrapper) => {
+    wrapper.remove();
+  });
+});
