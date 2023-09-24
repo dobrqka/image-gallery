@@ -1,0 +1,127 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+header {
+  background-color: red;
+  color: white;
+  display: grid;
+  justify-content: center;
+}
+
+.gallery {
+  height: auto;
+  background-color: #b3b3b3;
+}
+
+footer {
+  background-color: rgb(131, 131, 131);
+}
+
+.category-buttons {
+  height: 95vh;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-columns: 1fr;
+  align-items: center;
+  padding: 0 10rem;
+}
+
+.category-buttons button {
+  justify-self: center;
+  height: 25vh;
+  width: 20vw;
+  color: white;
+  font-size: 2rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  transition: opacity ease-in-out;
+  transition: scale ease-in-out 0.3;
+}
+
+.category-buttons button:hover {
+  transform: scale(1.2);
+  opacity: 0.5;
+}
+
+.all-button {
+  background-image: url(./images/chicken1.jpg), url(./images/tomato1.jpg);
+  background-size: 50% auto;
+  background-position: left, right;
+}
+
+.animals-button {
+  background-image: url(./images/cat5.jpg), url(./images/dog4.jpg);
+  background-position: left, right;
+  background-size: 50%, 50%;
+}
+
+.plants-button {
+  background-image: url(./images/tomato2.jpg), url(./images/eggplant5.jpg);
+  background-position: left, right;
+  background-size: 50%, 50%;
+}
+
+.all-animals-button {
+  display: none;
+}
+
+.cat-button {
+  display: none;
+}
+
+.dog-button {
+  display: none;
+}
+
+.hen-button {
+  display: none;
+}
+
+.all-plants-button {
+  display: none;
+}
+
+.tomato-button {
+  display: none;
+}
+
+.eggplant-button {
+  display: none;
+}
+
+.all {
+  display: none;
+}
+
+.galleries {
+  background-color: #b3b3b3;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  grid-auto-columns: 1fr;
+  grid-auto-rows: 1fr;
+}
+
+.galleries .img-wrapper {
+  width: 20vw;
+  height: 20vh;
+  background-color: black;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem;
+  display: none;
+}
+.galleries img {
+  width: auto;
+  height: 20vh;
+}
