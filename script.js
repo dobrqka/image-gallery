@@ -28,7 +28,7 @@ const backButton = document.querySelector(".back-button");
 const backButtonTwo = document.querySelector(".back-button2");
 const galleryPage = document.querySelector(".galleries");
 
-// used when you click on a category
+// hides category buttons
 const hideCategoryButtons = (categoryArray) => {
   categoryArray.forEach((button) => {
     button.style.display = "none";
@@ -36,6 +36,7 @@ const hideCategoryButtons = (categoryArray) => {
   });
 };
 
+// shows images by currently clicked category
 const showByCategory = (htmlClass) => {
   const allItems = document.querySelectorAll(htmlClass);
   allItems.forEach((item) => {
@@ -43,6 +44,7 @@ const showByCategory = (htmlClass) => {
   });
 };
 
+// shows subcategories or images
 allCategoryButtons.forEach((button) => {
   button.addEventListener("click", (e) => {
     backButton.style.display = "block";
@@ -73,26 +75,55 @@ const lightRoomClose = document.querySelector(".close");
 const lightRoomPrevious = document.querySelector(".previous");
 const lightRoomNext = document.querySelector(".next");
 
-///// previous and next functionality (maybe with data indexes on html elements?)
-///// then pimp up how it looks a bit, and move on to adding localstorage
-///// on tic-tac-toe so that you can start going through the react basiscs
-///// to start building your weather app
+// create an array of currently displayed images
+const createImagesArray = () => {
+  let currentImages = [];
+  allImageWrappers.forEach((wrapper) => {
+    if (wrapper.hasAttribute("style")) {
+      const currentImage = wrapper.firstElementChild;
+      currentImages.push(currentImage);
+    }
+  });
+  return { imagesArray: currentImages };
+};
 
-// const previousNext = (targetElement) => {
-//   lightRoomPrevious.addEventListener("click", () => {
-//     document.querySelectorAll(".lightroom img").forEach((image) => {
-//       image.remove();
-//     });
-//     const previousImage =
-//       targetElement.previousElementSibling.firstElementChild.cloneNode();
-//     lightRoom.appendChild(previousImage);
-//   });
-// };
+// show next image in lightroom
+lightRoomNext.addEventListener("click", (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+  const visibleImages = createImagesArray().imagesArray;
+  for (let i = 0; i < visibleImages.length; i++) {
+    if (visibleImages[i].src == lightRoom.lastElementChild.src) {
+      const nextImage = visibleImages[i + 1].cloneNode();
+      lightRoom.removeChild(lightRoom.lastElementChild);
+      lightRoom.appendChild(nextImage);
+      return;
+    }
+  }
+});
+
+// show previous image in lightroom
+lightRoomPrevious.addEventListener("click", () => {
+  const visibleImages = createImagesArray().imagesArray;
+  visibleImages.forEach((image) => {
+    if (image.src == lightRoom.lastElementChild.src) {
+      if (visibleImages.indexOf(image) == 0) {
+        return;
+      }
+      const previousImage =
+        visibleImages[visibleImages.indexOf(image) - 1].cloneNode();
+      console.log(previousImage);
+      lightRoom.removeChild(lightRoom.lastElementChild);
+      lightRoom.appendChild(previousImage);
+    }
+  });
+});
 
 // show lightroom
-
 allImageWrappers.forEach((imageWrapper) => {
   imageWrapper.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     lightRoom.style.display = "grid";
     closeLightroom(lightRoomClose);
     document.querySelectorAll(".lightroom img").forEach((wrapper) => {
@@ -101,7 +132,6 @@ allImageWrappers.forEach((imageWrapper) => {
     if (e.target.classList.contains("img-wrapper")) {
       const focusedImage = e.target.firstElementChild.cloneNode();
       lightRoom.appendChild(focusedImage);
-      // previousNext(e.target);
     } else {
       const focusedImage = e.target.cloneNode();
       lightRoom.appendChild(focusedImage);
@@ -110,7 +140,6 @@ allImageWrappers.forEach((imageWrapper) => {
 });
 
 // close lightroom
-
 const closeLightroom = (button) => {
   button.addEventListener("click", () => {
     lightRoom.style.display = "none";
@@ -120,7 +149,7 @@ const closeLightroom = (button) => {
   });
 };
 
-// used in "Back to Home" button
+// shows category buttons of previous page
 const showCategoryButtons = (buttonsArray) => {
   buttonsArray.forEach((button) => {
     button.style.display = "block";
@@ -129,28 +158,32 @@ const showCategoryButtons = (buttonsArray) => {
 };
 
 const allImages = document.querySelectorAll(".all");
-// used for "back to home"
+// hides images when clicking on 'back'
 const hideImages = () => {
   allImages.forEach((image) => {
-    image.style.display = "none";
+    image.removeAttribute("style");
   });
 };
 
-// back to home
+// remove inline style="display:grid" from images when hitting 'back'
+const removeStyleDisplay = () => {
+  allImageWrappers.forEach((wrapper) => {
+    wrapper.removeAttribute("style");
+  });
+};
 
+// helper function to tidy up 'if' conditions in next function
 const classCheck = (className) => {
   return galleryPage.classList.contains(className);
 };
 
+// back button shows previous categories
 [backButton, backButtonTwo].forEach((button) => {
   if (lightRoom.style.display != "none") {
     closeLightroom(button);
   }
   button.addEventListener("click", () => {
     if (
-      // galleryPage.classList.contains(".all") ||
-      // galleryPage.classList.contains("all-animals") ||
-      // galleryPage.classList.contains("all-plants")
       classCheck(".all") ||
       classCheck("all-animals") ||
       classCheck("all-plants")
@@ -161,6 +194,7 @@ const classCheck = (className) => {
       backButton.style.display = "none";
       backButtonTwo.style.display = "none";
       galleryPage.className = "galleries";
+      removeStyleDisplay();
       console.log("hey");
     } else if (
       classCheck(".animals") ||
@@ -173,6 +207,7 @@ const classCheck = (className) => {
       galleryPage.className = "galleries";
       galleryPage.classList.add("all-animals");
       backButtonTwo.style.display = "none";
+      removeStyleDisplay();
     } else if (
       classCheck(".plants") ||
       classCheck(".tomatoes") ||
@@ -183,8 +218,7 @@ const classCheck = (className) => {
       galleryPage.className = "galleries";
       galleryPage.classList.add("all-plants");
       backButtonTwo.style.display = "none";
+      removeStyleDisplay();
     }
   });
 });
-
-// next and previous image in lightroom
