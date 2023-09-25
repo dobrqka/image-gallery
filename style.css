@@ -1,6 +1,15 @@
 * {
   padding: 0;
   margin: 0;
+  font-family: "Barlow", sans-serif;
+  font-family: "Dancing Script", cursive;
+  font-family: "Dosis", sans-serif;
+  font-family: "Jost", sans-serif;
+  font-family: "Lobster", cursive;
+  font-family: "Montserrat", sans-serif;
+  font-family: "Mooli", sans-serif;
+  font-family: "Nunito", sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 body {
@@ -9,20 +18,46 @@ body {
 }
 
 header {
-  background-color: red;
+  background-color: rgb(184, 184, 184);
   color: white;
   display: grid;
   justify-content: center;
+  font-size: 1.3rem;
+  padding: 1rem;
 }
 
 .gallery {
   height: auto;
-  background-color: #b3b3b3;
+  background-color: #e9e9e9;
   position: relative;
 }
 
 footer {
-  background-color: rgb(131, 131, 131);
+  background-color: rgb(194, 194, 194);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+footer div {
+  grid-column: 2/3;
+  align-self: center;
+  justify-self: center;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  justify-self: center;
+}
+
+footer img {
+  width: 3rem;
+}
+
+footer img:hover {
+  transform: rotate(45deg);
+}
+
+footer img:active {
+  transform: rotate(180deg);
 }
 
 .category-buttons {
@@ -46,6 +81,7 @@ footer {
   background-repeat: no-repeat;
   transition: opacity ease-in-out;
   transition: scale ease-in-out 0.3;
+  font-weight: 900;
 }
 
 .category-buttons button:hover {
@@ -133,7 +169,7 @@ footer {
 }
 
 .galleries {
-  background-color: #b3b3b3;
+  background-color: #e9e9e9;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 1fr);
@@ -151,6 +187,7 @@ footer {
   align-items: center;
   margin: 2rem;
   display: none;
+  border-radius: 0.3rem;
 }
 .galleries img {
   width: auto;
@@ -169,31 +206,31 @@ footer {
   top: 0.5rem;
   left: 0.5rem;
   border: none;
-  padding: 0.2rem;
+  padding: 0.2rem 0.7rem;
   border-radius: 1rem;
   color: white;
-  background-color: rgb(61, 61, 61);
+  background-color: rgb(150, 150, 150);
   display: none;
+  font-weight: 900;
 }
 
 .back-button:hover,
 .back-button2:hover {
-  background-color: rgb(85, 85, 85);
+  background-color: rgb(196, 196, 196);
   cursor: pointer;
 }
 
 .back-button:active,
 .back-button2:active {
-  background-color: rgb(145, 145, 145);
+  background-color: rgb(226, 226, 226);
 }
 
 .lightroom {
   position: absolute;
   background-color: rgb(32, 32, 32);
-  width: 70vw;
-  height: 70vh;
-  top: 0;
-  bottom: 0;
+  width: 80vw;
+  height: 80vh;
+  top: 3rem;
   left: 0;
   right: 0;
   margin: auto;
@@ -208,7 +245,7 @@ footer {
 }
 
 .lightroom img {
-  height: 70vh;
+  height: 80vh;
   width: auto;
   margin: 0;
   justify-self: center;

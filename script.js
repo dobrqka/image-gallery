@@ -107,7 +107,6 @@ document.body.addEventListener("keydown", (e) => {
   e.preventDefault();
   e.stopPropagation();
   if (lightRoom.hasAttribute("style")) {
-    console.log(e.keyCode);
     if (e.key === "ArrowLeft") {
       showPrevious();
     } else if (e.key === "ArrowRight") {
@@ -227,7 +226,6 @@ const classCheck = (className) => {
       backButtonTwo.style.display = "none";
       galleryPage.className = "galleries";
       removeStyleDisplay();
-      console.log("hey");
     } else if (
       classCheck(".animals") ||
       classCheck(".cats") ||
