@@ -67,6 +67,59 @@ allCategoryButtons.forEach((button) => {
   });
 });
 
+const allImageWrappers = document.querySelectorAll(".img-wrapper");
+const lightRoom = document.querySelector(".lightroom");
+const lightRoomClose = document.querySelector(".close");
+const lightRoomPrevious = document.querySelector(".previous");
+const lightRoomNext = document.querySelector(".next");
+
+///// previous and next functionality (maybe with data indexes on html elements?)
+///// then pimp up how it looks a bit, and move on to adding localstorage
+///// on tic-tac-toe so that you can start going through the react basiscs
+///// to start building your weather app
+
+// const previousNext = (targetElement) => {
+//   lightRoomPrevious.addEventListener("click", () => {
+//     document.querySelectorAll(".lightroom img").forEach((image) => {
+//       image.remove();
+//     });
+//     const previousImage =
+//       targetElement.previousElementSibling.firstElementChild.cloneNode();
+//     lightRoom.appendChild(previousImage);
+//   });
+// };
+
+// show lightroom
+
+allImageWrappers.forEach((imageWrapper) => {
+  imageWrapper.addEventListener("click", (e) => {
+    lightRoom.style.display = "grid";
+    closeLightroom(lightRoomClose);
+    document.querySelectorAll(".lightroom img").forEach((wrapper) => {
+      wrapper.remove();
+    });
+    if (e.target.classList.contains("img-wrapper")) {
+      const focusedImage = e.target.firstElementChild.cloneNode();
+      lightRoom.appendChild(focusedImage);
+      // previousNext(e.target);
+    } else {
+      const focusedImage = e.target.cloneNode();
+      lightRoom.appendChild(focusedImage);
+    }
+  });
+});
+
+// close lightroom
+
+const closeLightroom = (button) => {
+  button.addEventListener("click", () => {
+    lightRoom.style.display = "none";
+    document.querySelectorAll(".lightroom .img-wrapper").forEach((wrapper) => {
+      wrapper.remove();
+    });
+  });
+};
+
 // used in "Back to Home" button
 const showCategoryButtons = (buttonsArray) => {
   buttonsArray.forEach((button) => {
@@ -90,6 +143,9 @@ const classCheck = (className) => {
 };
 
 [backButton, backButtonTwo].forEach((button) => {
+  if (lightRoom.style.display != "none") {
+    closeLightroom(button);
+  }
   button.addEventListener("click", () => {
     if (
       // galleryPage.classList.contains(".all") ||
@@ -131,33 +187,4 @@ const classCheck = (className) => {
   });
 });
 
-const allImageWrappers = document.querySelectorAll(".img-wrapper");
-const lightRoom = document.querySelector(".lightroom");
-const lightRoomClose = document.querySelector(".close");
-
-// show lightroom
-
-allImageWrappers.forEach((imageWrapper) => {
-  imageWrapper.addEventListener("click", (e) => {
-    lightRoom.style.display = "grid";
-    document.querySelectorAll(".lightroom img").forEach((wrapper) => {
-      wrapper.remove();
-    });
-    if (e.target.classList.contains("img-wrapper")) {
-      const focusedImage = e.target.firstElementChild.cloneNode();
-      lightRoom.appendChild(focusedImage);
-    } else {
-      const focusedImage = e.target.cloneNode();
-      lightRoom.appendChild(focusedImage);
-    }
-  });
-});
-
-// close lightroom
-
-lightRoomClose.addEventListener("click", () => {
-  lightRoom.style.display = "none";
-  document.querySelectorAll(".lightroom .img-wrapper").forEach((wrapper) => {
-    wrapper.remove();
-  });
-});
+// next and previous image in lightroom

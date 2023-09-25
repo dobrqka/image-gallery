@@ -121,6 +121,7 @@ footer {
 }
 
 .eggplant-button {
+  display: none;
   background-image: url(./images/eggplant4.jpg);
   background-size: contain;
   background-position: center;
