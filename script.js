@@ -88,11 +88,10 @@ const createImagesArray = () => {
 };
 
 // show next image in lightroom
-lightRoomNext.addEventListener("click", (e) => {
-  e.preventDefault();
-  e.stopPropagation();
+
+const showNext = () => {
   const visibleImages = createImagesArray().imagesArray;
-  for (let i = 0; i < visibleImages.length; i++) {
+  for (let i = 0; i < visibleImages.length - 1; i++) {
     if (visibleImages[i].src == lightRoom.lastElementChild.src) {
       const nextImage = visibleImages[i + 1].cloneNode();
       lightRoom.removeChild(lightRoom.lastElementChild);
@@ -100,10 +99,25 @@ lightRoomNext.addEventListener("click", (e) => {
       return;
     }
   }
+};
+
+// event listeners for showing next image in lightroom
+lightRoomNext.addEventListener("click", showNext);
+document.body.addEventListener("keydown", (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+  if (lightRoom.hasAttribute("style")) {
+    console.log(e.keyCode);
+    if (e.key === "ArrowLeft") {
+      showPrevious();
+    } else if (e.key === "ArrowRight") {
+      showNext();
+    }
+  }
 });
 
 // show previous image in lightroom
-lightRoomPrevious.addEventListener("click", () => {
+const showPrevious = () => {
   const visibleImages = createImagesArray().imagesArray;
   visibleImages.forEach((image) => {
     if (image.src == lightRoom.lastElementChild.src) {
@@ -112,12 +126,14 @@ lightRoomPrevious.addEventListener("click", () => {
       }
       const previousImage =
         visibleImages[visibleImages.indexOf(image) - 1].cloneNode();
-      console.log(previousImage);
       lightRoom.removeChild(lightRoom.lastElementChild);
       lightRoom.appendChild(previousImage);
     }
   });
-});
+};
+
+// event listeners for previous image
+lightRoomPrevious.addEventListener("click", showPrevious);
 
 // show lightroom
 allImageWrappers.forEach((imageWrapper) => {
@@ -142,12 +158,28 @@ allImageWrappers.forEach((imageWrapper) => {
 // close lightroom
 const closeLightroom = (button) => {
   button.addEventListener("click", () => {
-    lightRoom.style.display = "none";
+    lightRoom.removeAttribute("style");
     document.querySelectorAll(".lightroom .img-wrapper").forEach((wrapper) => {
       wrapper.remove();
     });
   });
 };
+
+//close lightroom when you click "Escape" key
+document.body.addEventListener("keydown", (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+  if (lightRoom.hasAttribute("style")) {
+    if (e.key === "Escape") {
+      lightRoom.removeAttribute("style");
+      document
+        .querySelectorAll(".lightroom .img-wrapper")
+        .forEach((wrapper) => {
+          wrapper.remove();
+        });
+    }
+  }
+});
 
 // shows category buttons of previous page
 const showCategoryButtons = (buttonsArray) => {
